@@ -22,7 +22,10 @@ upBtn.addEventListener("click", function() {
     containerIndex++;//incremento di uno l'indice
     imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
     if(containerIndex === imgContainerArray.length - 1){ //se arrivo in fondo al carosello mi nasconde il bottone
-        upBtn.classList.add("hidden");
+        // upBtn.classList.add("hidden");
+        imgContainerArray[imgContainerArray.lenght - 1].classList.remove('active');
+        containerIndex = 0;
+        imgContainerArray[containerIndex].classList.add('active');
     }
 });
 downBtn.addEventListener("click", function(){
