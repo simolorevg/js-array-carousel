@@ -11,6 +11,7 @@ for(let i = 0; i < imgArray.length; i++){
 //creo la sequenza
 imgContainerArray=document.getElementsByClassName('img-container');//genero l'array di div contenenti le immagini
 console.log(imgContainerArray);
+let containerArrayLenght = imgContainerArray.length;//questo mi servirà per il superbonus
 let containerIndex = 0;//imposto l'indice a zero
 imgContainerArray[0].classList.add("active");//parte dalla prima immagine
 const upBtn = document.querySelector('.up');
@@ -18,22 +19,28 @@ const downBtn = document.querySelector('.down');//creo le variabili per poter ut
 downBtn.classList.add('hidden');//nascondo inizialmente il bottone down
 upBtn.addEventListener("click", function() {
     downBtn.classList.remove('hidden');//faccio riapparire il pulsante down
-    imgContainerArray[containerIndex].classList.remove("active");//nascondo l'immagine corrente
-    containerIndex++;//incremento di uno l'indice
-    imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
-    if(containerIndex === imgContainerArray.length - 1){ //se arrivo in fondo al carosello mi nasconde il bottone
+    if(containerIndex === imgContainerArray.length - 1){ //se arrivo in fondo al carosello mi fa ripartire da capo
         // upBtn.classList.add("hidden");
-        imgContainerArray[imgContainerArray.lenght - 1].classList.remove('active');
-        containerIndex = 0;
-        imgContainerArray[containerIndex].classList.add('active');
+        imgContainerArray[containerIndex].classList.remove('active');//rimuovo la classe active all'immagine corrente
+        containerIndex = 0;//riporto all'inizio l'indice
+        imgContainerArray[containerIndex].classList.add('active');//aggiungo active all'immagine successiva
+    }else{
+        imgContainerArray[containerIndex].classList.remove("active");//nascondo l'immagine corrente
+        containerIndex++;//incremento di uno l'indice
+        imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
     }
+    console.log(containerIndex);
 });
 downBtn.addEventListener("click", function(){
     upBtn.classList.remove('hidden');// faccio riapparire i pulsante up
-    imgContainerArray[containerIndex].classList.remove("active");//nascondo l'immagine corrente
-    containerIndex--;//decremento di uno l'indice
-    imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
-    if(containerIndex === 0){ //se arrivo in fondo al carosello mi nasconde il bottone
-        downBtn.classList.add("hidden");
+    if(containerIndex === 0){ //se arrivo in fondo al carosello ricomincio da capo
+        // downBtn.classList.add("hidden");
+        imgContainerArray[containerIndex].classList.remove('active');
+        containerIndex = containerArrayLenght;
+        imgContainerArray[containerIndex].classList.add('active');
+    }else{
+        imgContainerArray[containerIndex].classList.remove("active");//nascondo l'immagine corrente
+        containerIndex--;//decremento di uno l'indice
+        imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
     }
 })
